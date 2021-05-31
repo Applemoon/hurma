@@ -20,20 +20,22 @@ public class ItemController {
 
     private final CategoryService categoryService;
     private final ItemService itemService;
+    private final ItemMapper itemMapper;
 
-    public ItemController(CategoryService categoryService, ItemService itemService) {
+    public ItemController(CategoryService categoryService, ItemService itemService, ItemMapper itemMapper) {
         this.categoryService = categoryService;
         this.itemService = itemService;
+        this.itemMapper = itemMapper;
     }
 
     @PostMapping("/items")
     @ResponseStatus(HttpStatus.CREATED)
     public void createItem(@RequestBody ItemDTO itemDTO) {
-        Category category = categoryService.getByName(itemDTO.getCategory());
+        Category category = categoryService.findByName(itemDTO.getCategory());
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
         }
-        Item item = ItemMapper.INSTANCE.INSTANCE.itemDTOToItem(itemDTO, category);
+        Item item = itemMapper.itemDTOToItem(itemDTO, category);
         itemService.save(item);
     }
 
@@ -43,6 +45,9 @@ public class ItemController {
         if (editedItemDTO.getBought() != null) item.setBought(editedItemDTO.getBought());
         if (editedItemDTO.getCategory() != null) {
             Category category = categoryService.getByName(editedItemDTO.getCategory());
+            if (category == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+            }
             item.setCategory(category);
         }
         if (editedItemDTO.getComment() != null) item.setComment(editedItemDTO.getComment());

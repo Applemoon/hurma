@@ -1,23 +1,14 @@
 package ru.pyatka.api.data;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
 import ru.pyatka.api.web.ItemDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ItemMapper {
 
-    ItemMapper INSTANCE = Mappers.getMapper( ItemMapper.class );
-
-    Item itemDTOToItem(ItemDTO itemDTO);
-
-    default Item itemDTOToItem(ItemDTO itemDTO, Category category) {
-        Item item = itemDTOToItem(itemDTO);
-        item.setCategory(category);
-        return item;
-    }
-
-    default Category map(String category) {
-        return null;
-    }
+    @Mapping(source = "itemDTO.id", target = "id")
+    @Mapping(source = "itemDTO.name", target = "name")
+    @Mapping(source = "category", target = "category")
+    Item itemDTOToItem(ItemDTO itemDTO, Category category);
 }

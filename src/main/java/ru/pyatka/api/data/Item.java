@@ -30,6 +30,6 @@ public class Item {
 //    @NonNull
     Category category;
     @NonNull String comment = "";
-    @NonNull boolean important = false;
-    @NonNull boolean needed = false;
+    boolean important = false;
+    boolean needed = false;
 }

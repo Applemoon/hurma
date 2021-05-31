@@ -22,7 +22,7 @@ public class CategoryService {
     }
 
     public void initDB() {
-        Category fruitCategory = new Category("Фрукты", "fruits", 1);
+        Category fruitCategory = new Category("Фрукты", "fruits");
         categoryRepository.save(fruitCategory);
         Item apple = new Item("Apple");
         apple.setCategory(fruitCategory);
@@ -31,7 +31,7 @@ public class CategoryService {
         lemon.setCategory(fruitCategory);
         itemRepository.save(lemon);
 
-        Category vegCategory = new Category("Овощи", "vegetables", 2);
+        Category vegCategory = new Category("Овощи", "vegetables");
         categoryRepository.save(vegCategory);
         Item tomato = new Item("Tomato");
         tomato.setCategory(vegCategory);
@@ -40,6 +40,10 @@ public class CategoryService {
 
     public List<Category> getCategories() {
         return categoryRepository.findAll();
+    }
+
+    public Category findByName(String name) {
+        return categoryRepository.findByName(name);
     }
 
     public Category getByName(String name) {

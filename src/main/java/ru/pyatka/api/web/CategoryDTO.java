@@ -1,18 +1,21 @@
 package ru.pyatka.api.web;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor // TODO delete?
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryDTO {
-    private long id;
-    private String fullName; // TODO full_name
-    private String name;
-    private int position;
-    private List<ItemDTO> items; // TODO item_set
+    Long id;
+    String fullName; // TODO full_name
+    String name;
+    Integer position;
+    List<ItemDTO> items; // TODO item_set
 }

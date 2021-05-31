@@ -1,13 +1,10 @@
 package ru.pyatka.api.data;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import ru.pyatka.api.web.CategoryDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
-
-    CategoryMapper INSTANCE = Mappers.getMapper( CategoryMapper.class );
 
     CategoryDTO categoryToCategoryDTO(Category category);
 

@@ -27,6 +27,6 @@ public class Category {
     Long id;
     @NonNull String fullName;
     @NonNull String name;
-    @NonNull int position;
+    int position;
     @OneToMany(mappedBy = "category") List<Item> items = new ArrayList<>();
 }
