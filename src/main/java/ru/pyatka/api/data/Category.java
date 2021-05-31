@@ -28,5 +28,5 @@ public class Category {
     @NonNull String fullName;
     @NonNull String name;
     @NonNull int position;
-    @OneToMany(mappedBy = "category") List<Item> itemSet = new ArrayList<>();
+    @OneToMany(mappedBy = "category") List<Item> items = new ArrayList<>();
 }

@@ -1,7 +1,6 @@
 package ru.pyatka.api.data;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import ru.pyatka.api.web.CategoryDTO;
 
@@ -10,6 +9,9 @@ public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper( CategoryMapper.class );
 
-//    @Mapping(source = "numberOfSeats", target = "seatCount")
-    CategoryDTO categoryToCategoryDTO(Category car);
+    CategoryDTO categoryToCategoryDTO(Category category);
+
+    default String map(Category category) {
+        return category.getName();
+    }
 }

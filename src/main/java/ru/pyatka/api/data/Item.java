@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -28,8 +27,8 @@ public class Item {
     @NonNull String name;
     @NonNull Boolean bought = true;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_category") // TODO delete?
-    @NonNull Category category;
+//    @NonNull
+    Category category;
     @NonNull String comment = "";
     @NonNull boolean important = false;
     @NonNull boolean needed = false;
