@@ -11,6 +11,7 @@ version = '0.0.1-SNAPSHOT'
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -21,7 +22,9 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 //	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'com.h2database:h2'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.mockito:mockito-core:3.+"
 }
 
 test {
