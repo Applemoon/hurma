@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor // TODO delete?
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ItemDTO {
     Long id;

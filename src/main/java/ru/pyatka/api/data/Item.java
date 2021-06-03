@@ -25,11 +25,11 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @NonNull String name;
-    @NonNull Boolean bought = true;
+    boolean bought = true;
     @ManyToOne(fetch = FetchType.LAZY)
 //    @NonNull
     Category category;
-    @NonNull String comment = "";
+    String comment = "";
     boolean important = false;
     boolean needed = false;
 }

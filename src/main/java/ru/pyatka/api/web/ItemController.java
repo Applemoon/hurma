@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +17,7 @@ import ru.pyatka.api.data.Item;
 import ru.pyatka.api.data.ItemMapper;
 
 @RestController()
+@RequestMapping("/ajax/items")
 public class ItemController {
 
     private final CategoryService categoryService;
@@ -28,20 +30,27 @@ public class ItemController {
         this.itemMapper = itemMapper;
     }
 
-    @PostMapping("/items")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createItem(@RequestBody ItemDTO itemDTO) {
         Category category = categoryService.findByName(itemDTO.getCategory());
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
         }
+        if (itemDTO.getName() == null) {
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Name can't be empty");
+        }
         Item item = itemMapper.itemDTOToItem(itemDTO, category);
         itemService.save(item);
     }
 
-    @PatchMapping("/items/{id}")
+    @PatchMapping("/{id}")
     public void editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
         Item item = itemService.find(id);
+        if (item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
+        }
+
         if (editedItemDTO.getBought() != null) item.setBought(editedItemDTO.getBought());
         if (editedItemDTO.getCategory() != null) {
             Category category = categoryService.getByName(editedItemDTO.getCategory());
@@ -58,13 +67,14 @@ public class ItemController {
         itemService.save(item);
     }
 
-    @DeleteMapping("/items/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteItem(@PathVariable long id) {
         itemService.delete(id);
     }
 
-    @PatchMapping("/items/all-not-bought")
+    @PatchMapping("/all-not-bought")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void setAllNotBought() {
         itemService.setAllNotBought();
     }
