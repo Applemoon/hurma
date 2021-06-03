@@ -1,0 +1,61 @@
+#app {
+	margin: 10px;
+	font-size: 17px;
+}
+
+.milk {
+}
+
+.meat {
+	background-color: #f2dede;
+	color: #a53835;
+}
+
+.fruits {
+	background-color: #e5f3e0;
+	color: #3c763d;
+}
+
+.vegetables {
+	background-color: #f1faff;
+	color: #255a73;
+}
+
+.cereals,.nuts {
+	background-color: #fcf8e3;
+	color: #6d552c;
+}
+
+.spices {
+	background-color: #f2e7fb;
+	color: #553173;
+}
+
+.other {
+	background-color: #e4e4e4;
+}
+
+.bought {
+	text-decoration: line-through;
+	color: grey;
+}
+
+.desktop-block {
+	display: flex;
+}
+
+.desktop-block__block {
+	width: 100%;
+}
+
+.desktop-block__block:nth-child(1) {
+	margin-right: 15px;
+}
+
+.desktop-block__header {
+	text-align: center;
+}
+
+table {
+	border: 2px solid grey;
+}

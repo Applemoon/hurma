@@ -1,11 +1,11 @@
 package ru.pyatka.api.web;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import ru.pyatka.api.data.Category;
 import ru.pyatka.api.data.Item;
 import ru.pyatka.api.data.ItemMapper;
 
-@RestController()
+@RestController
 @RequestMapping("/ajax/items")
 public class ItemController {
 
@@ -30,9 +30,9 @@ public class ItemController {
         this.itemMapper = itemMapper;
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public void createItem(@RequestBody ItemDTO itemDTO) {
+    public ItemDTO createItem(ItemDTO itemDTO) {
         Category category = categoryService.findByName(itemDTO.getCategory());
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
@@ -41,11 +41,12 @@ public class ItemController {
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Name can't be empty");
         }
         Item item = itemMapper.itemDTOToItem(itemDTO, category);
-        itemService.save(item);
+        item = itemService.save(item);
+        return itemMapper.itemToItemDTO(item);
     }
 
-    @PatchMapping("/{id}")
-    public void editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
+    @PatchMapping(value = "/{id}", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ItemDTO editItem(@PathVariable long id, ItemDTO editedItemDTO) {
         Item item = itemService.find(id);
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
@@ -64,7 +65,8 @@ public class ItemController {
         if (editedItemDTO.getName() != null) item.setName(editedItemDTO.getName());
         if (editedItemDTO.getNeeded() != null) item.setNeeded(editedItemDTO.getNeeded());
 
-        itemService.save(item);
+        item = itemService.save(item);
+        return itemMapper.itemToItemDTO(item);
     }
 
     @DeleteMapping("/{id}")

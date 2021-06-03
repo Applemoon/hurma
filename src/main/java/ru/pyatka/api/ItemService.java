@@ -23,8 +23,8 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    public void save(Item item) {
-        itemRepository.save(item);
+    public Item save(Item item) {
+        return itemRepository.save(item);
     }
 
     public void setAllNotBought() {

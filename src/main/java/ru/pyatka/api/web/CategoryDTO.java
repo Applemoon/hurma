@@ -12,8 +12,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryDTO {
     Long id;
-    String fullName; // TODO full_name
+    String fullName;
     String name;
     Integer position;
-    List<ItemDTO> items; // TODO item_set
+    List<ItemDTO> items;
 }

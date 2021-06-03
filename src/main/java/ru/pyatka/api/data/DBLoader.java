@@ -30,5 +30,8 @@ public class DBLoader implements CommandLineRunner {
         Item tomato = new Item("Tomato");
         tomato.setCategory(vegCategory);
         itemRepository.save(tomato);
+
+        Category otherCategory = new Category("Other", "other");
+        categoryRepository.save(otherCategory);
     }
 }

@@ -2,7 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.5.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id "io.freefair.lombok" version "6.0.0-m2"
+	id 'io.freefair.lombok' version '6.0.0-m2'
+	id 'com.github.node-gradle.node' version '3.0.1'
 }
 
 group = 'ru.uvarov'
@@ -23,9 +24,22 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation "org.mockito:mockito-core:3.+"
+	testImplementation 'org.mockito:mockito-core:3.+'
 }
 
 test {
 	useJUnitPlatform()
 }
+
+task buildReactApp(type: NodeTask, dependsOn: 'npmInstall') {
+	script = project.file('node_modules/webpack/bin/webpack.js')
+	args = [
+			'--mode', 'development',
+			'--entry', './src/main/webapp/javascript/main.jsx',
+			'-o', './src/main/resources/static/built'
+	]
+}
+
+processResources.dependsOn 'buildReactApp'
+clean.delete << file('node_modules')
+clean.delete << file('src/main/resources/static/built')

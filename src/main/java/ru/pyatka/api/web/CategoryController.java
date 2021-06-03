@@ -9,7 +9,7 @@ import ru.pyatka.api.data.CategoryMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController()
+@RestController
 @RequestMapping("/ajax/categories")
 public class CategoryController {
 

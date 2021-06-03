@@ -25,9 +25,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @NonNull String name;
-    boolean bought = true;
+    boolean bought = false;
     @ManyToOne(fetch = FetchType.LAZY)
-//    @NonNull
+//    @NonNull TODO delete?
     Category category;
     String comment = "";
     boolean important = false;
