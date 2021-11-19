@@ -1,4 +1,4 @@
-CREATE TABLE public.item (
+CREATE TABLE IF NOT EXISTS public.item (
     id serial PRIMARY KEY NOT NULL,
     "name" varchar(1000) NOT NULL,
     needed bool NOT NULL,

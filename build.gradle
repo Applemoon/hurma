@@ -21,7 +21,8 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-	runtimeOnly 'org.postgresql:postgresql'
+//	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'com.h2database:h2'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core'
@@ -46,6 +47,9 @@ clean.delete << file('node_modules')
 clean.delete << file('src/main/resources/static/built')
 
 flyway {
-	url = 'jdbc:postgresql://localhost:5432/ruaura3'
-	user = 'postgres'
+//	url = 'jdbc:postgresql://localhost:5432/db'
+//	user = 'postgres'
+	url = 'jdbc:h2:mem:testdb'
+	user = 'sa'
+	password = 'password'
 }

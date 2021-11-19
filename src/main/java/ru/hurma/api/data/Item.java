@@ -1,5 +1,6 @@
 package ru.hurma.api.data;
 
+import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import javax.persistence.ManyToOne;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-//@Table(name = "api_item")
+@Table
 public class Item {
 
     @Id
