@@ -1,4 +1,4 @@
-package ru.pyatka.api.data;
+package ru.hurma.api.data;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+//@Table(name = "api_item")
 public class Item {
 
     @Id

@@ -1,8 +1,8 @@
-package ru.pyatka.api;
+package ru.hurma.api;
 
 import org.springframework.stereotype.Service;
-import ru.pyatka.api.data.Category;
-import ru.pyatka.api.data.CategoryRepository;
+import ru.hurma.api.data.Category;
+import ru.hurma.api.data.CategoryRepository;
 
 import java.util.List;
 

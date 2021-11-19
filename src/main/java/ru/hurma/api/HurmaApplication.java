@@ -1,4 +1,4 @@
-package ru.pyatka.api;
+package ru.hurma.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,16 +9,16 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @SpringBootApplication
-public class PyatkaApiApplication {
+public class HurmaApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(PyatkaApiApplication.class, args);
+		SpringApplication.run(HurmaApplication.class, args);
 	}
 
 	@Bean
 	public Docket postsApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("ru.pyatka.api"))
+				.apis(RequestHandlerSelectors.basePackage("ru.hurma.api"))
 				.paths(PathSelectors.any())
 				.build();
 	}

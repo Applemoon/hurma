@@ -1,0 +1,10 @@
+INSERT INTO public.category (id, name, full_name, position) VALUES (1, 'fruits', 'Фрукты', 1);
+INSERT INTO public.category (id, name, full_name, position) VALUES (2, 'nuts', 'Консервы, орехи и сухофрукты', 2);
+INSERT INTO public.category (id, name, full_name, position) VALUES (3, 'milk', 'Хлеб, молочка и яйца', 3);
+INSERT INTO public.category (id, name, full_name, position) VALUES (4, 'meat', 'Мясо', 4);
+INSERT INTO public.category (id, name, full_name, position) VALUES (5, 'spices', 'Приправы и мюсли', 5);
+INSERT INTO public.category (id, name, full_name, position) VALUES (6, 'chemy', 'Химия', 6);
+INSERT INTO public.category (id, name, full_name, position) VALUES (7, 'cereals', 'Крупы, макароны, каша', 7);
+INSERT INTO public.category (id, name, full_name, position) VALUES (8, 'vegetables', 'Овощи', 8);
+INSERT INTO public.category (id, name, full_name, position) VALUES (9, 'other', 'Вода, кондитерка, алкоголь', 9);
+INSERT INTO public.category (id, name, full_name, position) VALUES (10, 'drugs', 'Аптека', 10);

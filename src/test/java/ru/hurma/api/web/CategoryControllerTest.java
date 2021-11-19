@@ -1,4 +1,4 @@
-package ru.pyatka.api.web;
+package ru.hurma.api.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +7,12 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.pyatka.api.CategoryService;
-import ru.pyatka.api.data.Category;
-import ru.pyatka.api.data.CategoryMapper;
-import ru.pyatka.api.data.CategoryMapperImpl;
-import ru.pyatka.api.data.CategoryRepository;
-import ru.pyatka.api.data.Item;
+import ru.hurma.api.CategoryService;
+import ru.hurma.api.data.Category;
+import ru.hurma.api.data.CategoryMapper;
+import ru.hurma.api.data.CategoryMapperImpl;
+import ru.hurma.api.data.CategoryRepository;
+import ru.hurma.api.data.Item;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ class CategoryControllerTest {
 
         given(categoryRepo.findAll()).willReturn(List.of(fruitCategory, vegCategory));
 
-        mockMvc.perform(get("/categories"))
+        mockMvc.perform(get("/ajax/categories"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

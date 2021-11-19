@@ -1,4 +1,4 @@
-package ru.pyatka.api.web;
+package ru.hurma.api.web;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

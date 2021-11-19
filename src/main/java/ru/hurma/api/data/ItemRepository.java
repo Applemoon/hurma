@@ -1,4 +1,4 @@
-package ru.pyatka.api.data;
+package ru.hurma.api.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

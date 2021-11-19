@@ -1,4 +1,4 @@
-package ru.pyatka.api.data;
+package ru.hurma.api.data;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+//import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+//@Table(nam = "api_category")
 public class Category {
 
     @Id

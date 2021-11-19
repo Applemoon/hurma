@@ -2,13 +2,6 @@ import axios from 'axios';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-function getURIParams(params) {
-	return Object.keys(params).reduce((prev, cur) => {
-		return prev + (prev ? '&' : '') + `${cur}=${encodeURIComponent(params[cur])}`;
-	}, '');
-}
 
 class Api {
 	static loadData() {
@@ -16,34 +9,31 @@ class Api {
 	}
 
 	static addItem(name, category, needed) {
-		return axios.post(
-			'/ajax/items',
-			getURIParams({ name: name, category: category, needed: needed })
-		);
+		return axios.post('/ajax/items', { name: name, category: category, needed: needed });
 	}
 
 	static setNeeded(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ needed: true }));
+		return axios.patch(`/ajax/items/${id}`, { needed: true });
 	}
 
 	static setNotNeeded(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ needed: false }));
+		return axios.patch(`/ajax/items/${id}`, { needed: false });
 	}
 
 	static setBought(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ bought: true }));
+		return axios.patch(`/ajax/items/${id}`, { bought: true });
 	}
 
 	static setNotBought(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ bought: false }));
+		return axios.patch(`/ajax/items/${id}`, { bought: false });
 	}
 
 	static setImportant(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ important: true }));
+		return axios.patch(`/ajax/items/${id}`, { important: true });
 	}
 
 	static setNotImportant(id) {
-		return axios.patch(`/ajax/items/${id}`, getURIParams({ important: false }));
+		return axios.patch(`/ajax/items/${id}`, { important: false });
 	}
 
 	static remove(id) {
@@ -51,10 +41,7 @@ class Api {
 	}
 
 	static edit(id, name, category, needed) {
-		return axios.patch(
-			`/ajax/items/${id}`,
-			getURIParams({ name: name, category: category, needed: needed })
-		);
+		return axios.patch(`/ajax/items/${id}`, { name: name, category: category, needed: needed });
 	}
 
 	static setAllNotBought() {

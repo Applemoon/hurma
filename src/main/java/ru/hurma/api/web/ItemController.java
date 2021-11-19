@@ -1,20 +1,20 @@
-package ru.pyatka.api.web;
+package ru.hurma.api.web;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.pyatka.api.CategoryService;
-import ru.pyatka.api.ItemService;
-import ru.pyatka.api.data.Category;
-import ru.pyatka.api.data.Item;
-import ru.pyatka.api.data.ItemMapper;
+import ru.hurma.api.CategoryService;
+import ru.hurma.api.ItemService;
+import ru.hurma.api.data.Category;
+import ru.hurma.api.data.Item;
+import ru.hurma.api.data.ItemMapper;
 
 @RestController
 @RequestMapping("/ajax/items")
@@ -30,9 +30,9 @@ public class ItemController {
         this.itemMapper = itemMapper;
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemDTO createItem(ItemDTO itemDTO) {
+    public ItemDTO createItem(@RequestBody ItemDTO itemDTO) {
         Category category = categoryService.findByName(itemDTO.getCategory());
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
@@ -45,8 +45,8 @@ public class ItemController {
         return itemMapper.itemToItemDTO(item);
     }
 
-    @PatchMapping(value = "/{id}", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ItemDTO editItem(@PathVariable long id, ItemDTO editedItemDTO) {
+    @PatchMapping(value = "/{id}")
+    public ItemDTO editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
         Item item = itemService.find(id);
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");

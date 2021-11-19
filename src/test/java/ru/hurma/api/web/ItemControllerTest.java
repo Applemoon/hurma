@@ -1,4 +1,4 @@
-package ru.pyatka.api.web;
+package ru.hurma.api.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import ru.pyatka.api.CategoryService;
-import ru.pyatka.api.ItemService;
-import ru.pyatka.api.data.Category;
-import ru.pyatka.api.data.CategoryRepository;
-import ru.pyatka.api.data.Item;
-import ru.pyatka.api.data.ItemMapper;
-import ru.pyatka.api.data.ItemMapperImpl;
-import ru.pyatka.api.data.ItemRepository;
+import ru.hurma.api.CategoryService;
+import ru.hurma.api.ItemService;
+import ru.hurma.api.data.Category;
+import ru.hurma.api.data.CategoryRepository;
+import ru.hurma.api.data.Item;
+import ru.hurma.api.data.ItemMapper;
+import ru.hurma.api.data.ItemMapperImpl;
+import ru.hurma.api.data.ItemRepository;
 
 import java.util.List;
 
@@ -56,11 +56,13 @@ class ItemControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders
-                        .post("/items")
+                        .post("/ajax/items")
                         .content(asJsonString(itemDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
+
+        // TODO check response
 
         Item item = itemMapper.itemDTOToItem(itemDTO, category);
         then(itemRepository).should(times(1)).save(item);
@@ -75,7 +77,7 @@ class ItemControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders
-                        .post("/items")
+                        .post("/ajax/items")
                         .content(asJsonString(itemDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -89,7 +91,7 @@ class ItemControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders
-                        .post("/items")
+                        .post("/ajax/items")
                         .content(asJsonString(itemDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -113,11 +115,13 @@ class ItemControllerTest {
                 "new name", true);
 
         mockMvc.perform(
-                patch("/items/1")
+                patch("/ajax/items/1")
                         .content(asJsonString(itemDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+
+        // TODO check response
 
         Item resultItem = itemMapper.itemDTOToItem(itemDTO, categoryNew);
         then(itemRepository).should(times(1)).save(resultItem);
@@ -126,7 +130,7 @@ class ItemControllerTest {
     @Test
     void shouldErrorWhenEditNonexistentItem() throws Exception {
         mockMvc.perform(
-                patch("/items/1")
+                patch("/ajax/items/1")
                         .content(asJsonString(new ItemDTO()))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -135,7 +139,7 @@ class ItemControllerTest {
 
     @Test
     void deleteItem() throws Exception {
-        mockMvc.perform(delete("/items/1"))
+        mockMvc.perform(delete("/ajax/items/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
@@ -151,7 +155,7 @@ class ItemControllerTest {
         List<Item> items = List.of(item1, item2);
         given(itemRepository.findByBought(true)).willReturn(items);
 
-        mockMvc.perform(patch("/items/all-not-bought"))
+        mockMvc.perform(patch("/ajax/items/all-not-bought"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 

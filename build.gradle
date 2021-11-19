@@ -1,9 +1,10 @@
 plugins {
+	id 'java'
 	id 'org.springframework.boot' version '2.5.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
 	id 'io.freefair.lombok' version '6.0.0-m2'
 	id 'com.github.node-gradle.node' version '3.0.1'
+	id 'org.flywaydb.flyway' version '7.9.2'
 }
 
 group = 'ru.uvarov'
@@ -20,11 +21,11 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-//	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mockito:mockito-core:3.+'
+	testImplementation 'org.mockito:mockito-core'
+	testImplementation 'com.h2database:h2'
 }
 
 test {
@@ -43,3 +44,8 @@ task buildReactApp(type: NodeTask, dependsOn: 'npmInstall') {
 processResources.dependsOn 'buildReactApp'
 clean.delete << file('node_modules')
 clean.delete << file('src/main/resources/static/built')
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/ruaura3'
+	user = 'postgres'
+}

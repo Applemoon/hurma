@@ -1,13 +1,12 @@
-package ru.pyatka.api;
+package ru.hurma.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PyatkaApiApplicationTests {
+class HurmaApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
-
 }

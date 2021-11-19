@@ -1,8 +1,8 @@
-package ru.pyatka.api.data;
+package ru.hurma.api.data;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.pyatka.api.web.ItemDTO;
+import ru.hurma.api.web.ItemDTO;
 
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
