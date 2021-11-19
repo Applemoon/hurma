@@ -1,0 +1,3 @@
+spring.jpa.properties.hibernate:
+  jdbc.batch_size: 50
+  default_batch_fetch_size: 50
