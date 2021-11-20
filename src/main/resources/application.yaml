@@ -3,14 +3,7 @@ spring:
     properties.hibernate:
       jdbc.batch_size: 50
       default_batch_fetch_size: 50
-      format_sql: true
-    show-sql: true
     hibernate.ddl-auto: none
-  datasource:
-    url: jdbc:postgresql://localhost:5432/hurma
-    username: test
   flyway:
     enabled: true
-    user: test
-    url: jdbc:postgresql://localhost:5432/hurma
     locations: filesystem:db/migration

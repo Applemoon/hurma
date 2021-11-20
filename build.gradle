@@ -46,6 +46,7 @@ clean.delete << file('node_modules')
 clean.delete << file('src/main/resources/static/built')
 
 flyway {
-	url = 'jdbc:postgresql://localhost:5432/hurma'
-	user = 'test'
+	url = System.getenv('SPRING_DATASOURCE_URL') ?: "jdbc:postgresql://localhost:5432/hurma"
+	user = System.getenv('SPRING_DATASOURCE_USER') ?: "test"
+	password = System.getenv('SPRING_DATASOURCE_PASSWORD')
 }
