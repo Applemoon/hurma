@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.hurma.api.CategoryService;
 import ru.hurma.api.data.Category;
-import ru.hurma.api.data.CategoryMapper;
-import ru.hurma.api.data.CategoryMapperImpl;
 import ru.hurma.api.data.CategoryRepository;
 import ru.hurma.api.data.Item;
 
@@ -97,10 +95,6 @@ class CategoryControllerTest {
 
     @TestConfiguration
     static class TestConfig {
-        @Bean
-        public CategoryMapper categoryMapper() {
-            return new CategoryMapperImpl();
-        }
 
         @Bean
         public CategoryService categoryService(CategoryRepository categoryRepository) {

@@ -1,11 +1,11 @@
 package ru.hurma.api.data;
 
-import javax.persistence.Table;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
@@ -13,16 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-//import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
 @RequiredArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table
+@Getter
+@Setter
 public class Category {
 
     @Id
@@ -31,5 +30,6 @@ public class Category {
     @NonNull String fullName;
     @NonNull String name;
     int position;
-    @OneToMany(mappedBy = "category") List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    List<Item> items = new ArrayList<>();
 }

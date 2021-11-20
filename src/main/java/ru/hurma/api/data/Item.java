@@ -1,12 +1,13 @@
 package ru.hurma.api.data;
 
-import javax.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Data;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,22 +17,37 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Table
+@AllArgsConstructor
+@Getter
+@Setter
 public class Item {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    @NonNull String name;
-    boolean bought = false;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NonNull
+    private String name;
+    @NonNull
+    private String comment = "";
+    private Boolean bought = false;
     @ManyToOne(fetch = FetchType.LAZY)
-//    @NonNull TODO delete?
-    Category category;
-    String comment = "";
-    boolean important = false;
-    boolean needed = false;
+    @JsonSerialize(using = ItemCategorySerializer.class)
+    @JsonDeserialize(using = ItemCategoryDeserializer.class)
+    private Category category;
+    private Boolean important = false;
+    private Boolean needed = false;
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", comment='" + comment + '\'' +
+                ", bought=" + bought +
+                ", category=" + category.getName() +
+                ", important=" + important +
+                ", needed=" + needed +
+                '}';
+    }
 }

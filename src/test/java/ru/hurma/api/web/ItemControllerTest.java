@@ -16,8 +16,6 @@ import ru.hurma.api.ItemService;
 import ru.hurma.api.data.Category;
 import ru.hurma.api.data.CategoryRepository;
 import ru.hurma.api.data.Item;
-import ru.hurma.api.data.ItemMapper;
-import ru.hurma.api.data.ItemMapperImpl;
 import ru.hurma.api.data.ItemRepository;
 
 import java.util.List;
@@ -42,58 +40,55 @@ class ItemControllerTest {
     @MockBean
     private ItemRepository itemRepository;
 
-    @Autowired
-    private ItemMapper itemMapper;
-
     @Test
     void shouldCreateItem() throws Exception {
         Category category = new Category("Fruits", "fruits");
         given(categoryRepository.findByName("fruit")).willReturn(category);
 
-        ItemDTO itemDTO = new ItemDTO();
-        itemDTO.setName("name");
-        itemDTO.setCategory("fruit");
+        Item item = new Item();
+        item.setName("name");
+        item.setCategory(category);
 
         mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/ajax/items")
-                        .content(asJsonString(itemDTO))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        MockMvcRequestBuilders
+                                .post("/ajax/items")
+                                .content(asJsonString(item))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
         // TODO check response
 
-        Item item = itemMapper.itemDTOToItem(itemDTO, category);
         then(itemRepository).should(times(1)).save(item);
     }
 
     @Test
     void shouldReturnErrorWhenCreateItemNoName() throws Exception {
-        given(categoryRepository.findByName("fruit")).willReturn(new Category("Fruits", "fruits"));
+        Category category = new Category("Fruits", "fruits");
+        given(categoryRepository.findByName("fruit")).willReturn(category);
 
-        ItemDTO itemDTO = new ItemDTO();
-        itemDTO.setCategory("fruit");
+        Item item = new Item();
+        item.setCategory(category);
 
         mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/ajax/items")
-                        .content(asJsonString(itemDTO))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        MockMvcRequestBuilders
+                                .post("/ajax/items")
+                                .content(asJsonString(item))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isExpectationFailed());
     }
 
     @Test
     void shouldReturnErrorWhenCreateItemWrongCategory() throws Exception {
-        ItemDTO itemDTO = new ItemDTO();
-        itemDTO.setCategory("wrong");
+        Item item = new Item();
+        item.setCategory(null);
 
         mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/ajax/items")
-                        .content(asJsonString(itemDTO))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        MockMvcRequestBuilders
+                                .post("/ajax/items")
+                                .content(asJsonString(item))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -105,34 +100,33 @@ class ItemControllerTest {
         given(categoryRepository.getByName(categoryOld.getName())).willReturn(categoryOld);
         given(categoryRepository.getByName(categoryNew.getName())).willReturn(categoryNew);
 
-        Item item = new Item();
-        item.setName("some name");
-        item.setId(1L);
-        item.setCategory(categoryOld);
-        given(itemRepository.findById(1L)).willReturn(java.util.Optional.of(item));
+        Item repoItem = new Item();
+        repoItem.setName("some name");
+        repoItem.setId(1L);
+        repoItem.setCategory(categoryOld);
+        given(itemRepository.findById(1L)).willReturn(java.util.Optional.of(repoItem));
 
-        ItemDTO itemDTO = new ItemDTO(1L, true, categoryNew.getName(), "new comment", true,
-                "new name", true);
+        Item item = new Item(1L, categoryNew.getName(), "new comment", true,
+                categoryNew, true,true);
 
         mockMvc.perform(
-                patch("/ajax/items/1")
-                        .content(asJsonString(itemDTO))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        patch("/ajax/items/1")
+                                .content(asJsonString(item))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
 
         // TODO check response
 
-        Item resultItem = itemMapper.itemDTOToItem(itemDTO, categoryNew);
-        then(itemRepository).should(times(1)).save(resultItem);
+        then(itemRepository).should(times(1)).save(item);
     }
 
     @Test
     void shouldErrorWhenEditNonexistentItem() throws Exception {
         mockMvc.perform(
-                patch("/ajax/items/1")
-                        .content(asJsonString(new ItemDTO()))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        patch("/ajax/items/1")
+                                .content(asJsonString(new Item()))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -163,8 +157,8 @@ class ItemControllerTest {
     }
 
     @SneakyThrows
-    private String asJsonString(final ItemDTO itemDTO) {
-        return new ObjectMapper().writeValueAsString(itemDTO);
+    private String asJsonString(final Item item) {
+        return new ObjectMapper().writeValueAsString(item);
     }
 
     @TestConfiguration
@@ -177,11 +171,6 @@ class ItemControllerTest {
         @Bean
         public ItemService itemService(ItemRepository itemRepository) {
             return new ItemService(itemRepository);
-        }
-
-        @Bean
-        public ItemMapper itemMapper() {
-            return new ItemMapperImpl();
         }
     }
 }

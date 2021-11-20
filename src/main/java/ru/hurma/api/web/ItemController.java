@@ -14,7 +14,6 @@ import ru.hurma.api.CategoryService;
 import ru.hurma.api.ItemService;
 import ru.hurma.api.data.Category;
 import ru.hurma.api.data.Item;
-import ru.hurma.api.data.ItemMapper;
 
 @RestController
 @RequestMapping("/ajax/items")
@@ -22,31 +21,25 @@ public class ItemController {
 
     private final CategoryService categoryService;
     private final ItemService itemService;
-    private final ItemMapper itemMapper;
 
-    public ItemController(CategoryService categoryService, ItemService itemService, ItemMapper itemMapper) {
+    public ItemController(CategoryService categoryService, ItemService itemService) {
         this.categoryService = categoryService;
         this.itemService = itemService;
-        this.itemMapper = itemMapper;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemDTO createItem(@RequestBody ItemDTO itemDTO) {
-        Category category = categoryService.findByName(itemDTO.getCategory());
+    public Item createItem(@RequestBody Item item) {
+        Category category = categoryService.findByName(item.getCategory().getName());
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
         }
-        if (itemDTO.getName() == null) {
-            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Name can't be empty");
-        }
-        Item item = itemMapper.itemDTOToItem(itemDTO, category);
-        item = itemService.save(item);
-        return itemMapper.itemToItemDTO(item);
+        item.setCategory(category);
+        return itemService.save(item);
     }
 
     @PatchMapping(value = "/{id}")
-    public ItemDTO editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
+    public Item editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
         Item item = itemService.find(id);
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
@@ -65,8 +58,7 @@ public class ItemController {
         if (editedItemDTO.getName() != null) item.setName(editedItemDTO.getName());
         if (editedItemDTO.getNeeded() != null) item.setNeeded(editedItemDTO.getNeeded());
 
-        item = itemService.save(item);
-        return itemMapper.itemToItemDTO(item);
+        return itemService.save(item);
     }
 
     @DeleteMapping("/{id}")
