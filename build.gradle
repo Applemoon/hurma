@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'io.freefair.lombok' version '6.0.0-m2'
 	id 'com.github.node-gradle.node' version '3.0.1'
-	id 'org.flywaydb.flyway' version '7.9.2'
+	id 'org.flywaydb.flyway' version '8.0.5'
 }
 
 group = 'ru.uvarov'
@@ -21,8 +21,7 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-//	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core'
@@ -47,9 +46,6 @@ clean.delete << file('node_modules')
 clean.delete << file('src/main/resources/static/built')
 
 flyway {
-//	url = 'jdbc:postgresql://localhost:5432/db'
-//	user = 'postgres'
-	url = 'jdbc:h2:mem:testdb'
-	user = 'sa'
-	password = 'password'
+	url = 'jdbc:postgresql://localhost:5432/hurma'
+	user = 'test'
 }

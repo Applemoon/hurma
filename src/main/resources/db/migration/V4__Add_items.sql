@@ -1,1 +1,1 @@
-INSERT INTO item (name, category_id) VALUES ('Продукт', 2);
+INSERT INTO item ("name", category_id, needed, bought, "comment") VALUES ('Продукт', 2, false, false, '');
