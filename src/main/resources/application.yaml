@@ -6,4 +6,4 @@ spring:
     hibernate.ddl-auto: none
   flyway:
     enabled: true
-    locations: filesystem:db/migration
+    locations: classpath:db/migration

@@ -39,7 +39,9 @@
     "webpack-cli": "^4.5.0"
   },
   "scripts": {
-    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
+    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js",
+    "dev": "webpack --watch --mode development ./src/main/webapp/javascript/main.jsx --output-path ./target/classes/static/built/bundle.js",
+    "build": "webpack --mode production ./src/main/webapp/javascript/main.jsx --output-path ./target/classes/static/built/bundle.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",

@@ -8,10 +8,14 @@ plugins {
 }
 
 group = 'ru.uvarov'
-version = '0.0.1-SNAPSHOT'
+version = '1'
 
 repositories {
 	mavenCentral()
+}
+
+jar {
+	enabled = false
 }
 
 dependencies {
@@ -22,6 +26,7 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	runtimeOnly 'org.postgresql:postgresql'
+	implementation group: 'org.flywaydb', name: 'flyway-core', version: '8.1.0'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core'
@@ -31,19 +36,6 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
-
-task buildReactApp(type: NodeTask, dependsOn: 'npmInstall') {
-	script = project.file('node_modules/webpack/bin/webpack.js')
-	args = [
-			'--mode', 'development',
-			'--entry', './src/main/webapp/javascript/main.jsx',
-			'-o', './src/main/resources/static/built'
-	]
-}
-
-processResources.dependsOn 'buildReactApp'
-clean.delete << file('node_modules')
-clean.delete << file('src/main/resources/static/built')
 
 flyway {
 	url = System.getenv('SPRING_DATASOURCE_URL') ?: "jdbc:postgresql://localhost:5432/hurma"
