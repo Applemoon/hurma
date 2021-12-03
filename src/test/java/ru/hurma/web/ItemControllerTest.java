@@ -1,4 +1,4 @@
-package ru.hurma.api.web;
+package ru.hurma.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import ru.hurma.api.CategoryService;
-import ru.hurma.api.ItemService;
-import ru.hurma.api.data.Category;
-import ru.hurma.api.data.CategoryRepository;
-import ru.hurma.api.data.Item;
-import ru.hurma.api.data.ItemRepository;
+import ru.hurma.service.CategoryService;
+import ru.hurma.service.ItemService;
+import ru.hurma.data.Category;
+import ru.hurma.data.CategoryRepository;
+import ru.hurma.data.Item;
+import ru.hurma.data.ItemRepository;
 
 import java.util.List;
 

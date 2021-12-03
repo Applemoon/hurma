@@ -1,10 +1,10 @@
-package ru.hurma.api.web;
+package ru.hurma.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.hurma.api.CategoryService;
-import ru.hurma.api.data.Category;
+import ru.hurma.service.CategoryService;
+import ru.hurma.data.Category;
 
 import java.util.List;
 

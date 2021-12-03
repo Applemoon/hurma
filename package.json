@@ -1,30 +1,25 @@
 {
-  "name": "spring-data-rest-and-reactjs",
-  "version": "0.1.0",
-  "description": "Demo of ReactJS + Spring Data REST",
+  "name": "hurma",
+  "version": "1.1.0",
+  "description": "Shopping list",
   "repository": {
     "type": "git",
-    "url": "git@github.com:spring-guides/tut-react-and-spring-data-rest.git"
+    "url": "git@github.com:Applemoon/hurma.git"
   },
-  "keywords": [
-    "rest",
-    "hateoas",
-    "spring",
-    "data",
-    "react"
-  ],
-  "author": "Greg L. Turnquist",
+  "keywords": [],
+  "author": "Uvarov Aleksandr",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/spring-guides/tut-react-and-spring-data-rest/issues"
+    "url": "https://github.com/Applemoon/hurma/issues"
   },
-  "homepage": "https://github.com/spring-guides/tut-react-and-spring-data-rest",
+  "homepage": "https://github.com/Applemoon/hurma",
   "dependencies": {
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "caniuse-lite": "^1.0.30001284",
     "css-loader": "^5.0.2",
     "prop-types": "^15.6.2",
     "react": "~17.0.2",
@@ -39,9 +34,8 @@
     "webpack-cli": "^4.5.0"
   },
   "scripts": {
-    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js",
-    "dev": "webpack --watch --mode development ./src/main/webapp/javascript/main.jsx --output-path ./target/classes/static/built/bundle.js",
-    "build": "webpack --mode production ./src/main/webapp/javascript/main.jsx --output-path ./target/classes/static/built/bundle.js"
+    "dev":   "webpack --watch --mode development",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",

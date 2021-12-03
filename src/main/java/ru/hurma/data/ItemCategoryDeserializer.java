@@ -1,4 +1,4 @@
-package ru.hurma.api.data;
+package ru.hurma.data;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

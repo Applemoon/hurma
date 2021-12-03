@@ -1,4 +1,4 @@
-package ru.hurma.api.data;
+package ru.hurma.data;
 
 import lombok.AccessLevel;
 import lombok.Getter;

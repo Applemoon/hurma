@@ -1,4 +1,4 @@
-package ru.hurma.api;
+package ru.hurma;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

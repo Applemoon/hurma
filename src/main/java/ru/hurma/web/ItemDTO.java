@@ -1,4 +1,4 @@
-package ru.hurma.api.web;
+package ru.hurma.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

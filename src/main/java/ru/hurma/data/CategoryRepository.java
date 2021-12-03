@@ -1,4 +1,4 @@
-package ru.hurma.api.data;
+package ru.hurma.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

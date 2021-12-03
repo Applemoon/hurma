@@ -1,8 +1,8 @@
-package ru.hurma.api;
+package ru.hurma.service;
 
 import org.springframework.stereotype.Service;
-import ru.hurma.api.data.Category;
-import ru.hurma.api.data.CategoryRepository;
+import ru.hurma.data.Category;
+import ru.hurma.data.CategoryRepository;
 
 import java.util.List;
 

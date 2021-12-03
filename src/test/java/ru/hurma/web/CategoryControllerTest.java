@@ -1,4 +1,4 @@
-package ru.hurma.api.web;
+package ru.hurma.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +7,10 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.hurma.api.CategoryService;
-import ru.hurma.api.data.Category;
-import ru.hurma.api.data.CategoryRepository;
-import ru.hurma.api.data.Item;
+import ru.hurma.service.CategoryService;
+import ru.hurma.data.Category;
+import ru.hurma.data.CategoryRepository;
+import ru.hurma.data.Item;
 
 import java.util.List;
 

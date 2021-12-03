@@ -1,4 +1,4 @@
-package ru.hurma.api.web;
+package ru.hurma.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.hurma.api.CategoryService;
-import ru.hurma.api.ItemService;
-import ru.hurma.api.data.Category;
-import ru.hurma.api.data.Item;
+import ru.hurma.service.CategoryService;
+import ru.hurma.service.ItemService;
+import ru.hurma.data.Category;
+import ru.hurma.data.Item;
 
 @RestController
 @RequestMapping("/ajax/items")
