@@ -3,13 +3,13 @@ package ru.hurma.web;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.hurma.service.CategoryService;
 import ru.hurma.data.Category;
+import ru.hurma.service.CategoryService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/ajax/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -18,7 +18,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Category> getCategories() {
         return categoryService.getCategories();
     }

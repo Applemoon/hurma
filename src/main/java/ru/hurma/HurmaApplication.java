@@ -10,16 +10,16 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @SpringBootApplication
 public class HurmaApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(HurmaApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HurmaApplication.class, args);
+    }
 
-	@Bean
-	public Docket postsApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("ru.hurma.api"))
-				.paths(PathSelectors.any())
-				.build();
-	}
+    @Bean
+    public Docket postsApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("ru.hurma"))
+                .paths(PathSelectors.any())
+                .build();
+    }
 }

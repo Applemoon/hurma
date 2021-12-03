@@ -51,7 +51,7 @@ class ItemControllerTest {
 
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .post("/ajax/items")
+                                .post("/api/items")
                                 .content(asJsonString(item))
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -72,7 +72,7 @@ class ItemControllerTest {
 
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .post("/ajax/items")
+                                .post("/api/items")
                                 .content(asJsonString(item))
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -86,7 +86,7 @@ class ItemControllerTest {
 
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .post("/ajax/items")
+                                .post("/api/items")
                                 .content(asJsonString(item))
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -110,7 +110,7 @@ class ItemControllerTest {
                 categoryNew, true,true);
 
         mockMvc.perform(
-                        patch("/ajax/items/1")
+                        patch("/api/items/1")
                                 .content(asJsonString(item))
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -124,7 +124,7 @@ class ItemControllerTest {
     @Test
     void shouldErrorWhenEditNonexistentItem() throws Exception {
         mockMvc.perform(
-                        patch("/ajax/items/1")
+                        patch("/api/items/1")
                                 .content(asJsonString(new Item()))
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -133,7 +133,7 @@ class ItemControllerTest {
 
     @Test
     void deleteItem() throws Exception {
-        mockMvc.perform(delete("/ajax/items/1"))
+        mockMvc.perform(delete("/api/items/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
@@ -149,7 +149,7 @@ class ItemControllerTest {
         List<Item> items = List.of(item1, item2);
         given(itemRepository.findByBought(true)).willReturn(items);
 
-        mockMvc.perform(patch("/ajax/items/all-not-bought"))
+        mockMvc.perform(patch("/api/items/all-not-bought"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 

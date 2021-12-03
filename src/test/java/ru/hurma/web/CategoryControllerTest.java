@@ -52,7 +52,7 @@ class CategoryControllerTest {
 
         given(categoryRepo.findAll()).willReturn(List.of(fruitCategory, vegCategory));
 
-        mockMvc.perform(get("/ajax/categories"))
+        mockMvc.perform(get("/api/categories"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

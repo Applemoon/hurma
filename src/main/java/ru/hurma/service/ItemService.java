@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hurma.data.Item;
 import ru.hurma.data.ItemRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -15,8 +15,8 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public Item find(long id) {
-        return itemRepository.findById(id).orElse(null);
+    public Optional<Item> find(long id) {
+        return itemRepository.findById(id);
     }
 
     public void delete(long id) {
@@ -28,10 +28,6 @@ public class ItemService {
     }
 
     public void setAllNotBought() {
-        List<Item> boughtItems = itemRepository.findByBought(true);
-        for (Item item : boughtItems) {
-            item.setBought(false);
-        }
-        itemRepository.saveAll(boughtItems);
+        itemRepository.setAllNotBought();
     }
 }

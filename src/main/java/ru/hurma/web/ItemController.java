@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.hurma.service.CategoryService;
-import ru.hurma.service.ItemService;
 import ru.hurma.data.Category;
 import ru.hurma.data.Item;
+import ru.hurma.service.CategoryService;
+import ru.hurma.service.ItemService;
 
 @RestController
-@RequestMapping("/ajax/items")
+@RequestMapping("/api/items")
 public class ItemController {
 
     private final CategoryService categoryService;
@@ -40,10 +40,9 @@ public class ItemController {
 
     @PatchMapping(value = "/{id}")
     public Item editItem(@PathVariable long id, @RequestBody ItemDTO editedItemDTO) {
-        Item item = itemService.find(id);
-        if (item == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
-        }
+        Item item = itemService
+                .find(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found"));
 
         if (editedItemDTO.getBought() != null) item.setBought(editedItemDTO.getBought());
         if (editedItemDTO.getCategory() != null) {
